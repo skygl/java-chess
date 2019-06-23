@@ -1,5 +1,6 @@
 package chess.model.board;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -30,6 +31,10 @@ public enum Column {
             map.put(value.columnIndex, value);
         }
         return map;
+    }
+
+    public static Column findColumnByName(String name) {
+        return Arrays.stream(Column.values()).filter(column -> column.name.equals(name)).findAny().get();
     }
 
     public static Column getByIndex(final int columnIndex) {

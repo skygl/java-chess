@@ -1,5 +1,6 @@
 package chess.model.board;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -30,6 +31,14 @@ public enum Row {
             map.put(value.rowIndex, value);
         }
         return map;
+    }
+
+    public static Row findRowByName(String name) {
+        return Arrays.stream(Row.values()).filter(row -> {
+            System.out.println(row.toString());
+            System.out.println(name);
+            return row.name.equals(name);
+        }).findAny().get();
     }
 
     public static Row getByIndex(final int rowIndex) {

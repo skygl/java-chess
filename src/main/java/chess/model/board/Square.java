@@ -15,6 +15,13 @@ public class Square {
         this.row = row;
     }
 
+    public Square(String source) {
+        System.out.println(source.substring(0, 1));
+        System.out.println(source.substring(1, 2));
+        this.row = Row.findRowByName(source.substring(1, 2));
+        this.column = Column.findColumnByName(source.substring(0, 1).toUpperCase());
+    }
+
     public Column getColumn() {
         return column;
     }
