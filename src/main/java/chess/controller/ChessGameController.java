@@ -19,8 +19,12 @@ public class ChessGameController {
         response.type("application/json");
         Map<String, Object> model = new HashMap<>();
         try {
-            model.put("result", service.canMove(new Square(request.queryMap("source").value()), new Square(request.queryMap("target").value())));
-            board.move(new Square(request.queryMap("source").value()), new Square(request.queryMap("target").value()));
+            Square preSquare = new Square(request.queryMap("source").value());
+            Square postSquare = new Square(request.queryMap("target").value());
+            boolean canMove = service.canMove(preSquare, postSquare);
+            model.put("result", canMove);
+            if (canMove)
+                board.move(new Square(request.queryMap("source").value()), new Square(request.queryMap("target").value()));
             return new Gson().toJson(model);
         } catch (Exception e) {
             model.put("result", false);
