@@ -35,6 +35,16 @@ public class Board {
         lines.put(row, rank);
     }
 
+    public boolean move(final Square preSquare, final Square postSquare) {
+        System.out.println(preSquare);
+        System.out.println(postSquare);
+        System.out.println(ConsoleOutput.getBoardString(this));
+        setPiece(postSquare, getPiece(preSquare));
+        setPiece(preSquare, null);
+        System.out.println(ConsoleOutput.getBoardString(this));
+        return true;
+    }
+
     public Piece getPiece(final Square square) {
         try {
             final Column column = square.getColumn();
