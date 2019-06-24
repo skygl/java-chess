@@ -55,6 +55,6 @@ public enum Column {
 
     @Override
     public String toString() {
-        return "Column " + this.name;
+        return this.name.toLowerCase();
     }
 }

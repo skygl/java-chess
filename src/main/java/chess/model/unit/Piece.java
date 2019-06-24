@@ -34,4 +34,9 @@ public abstract class Piece {
     public int hashCode() {
         return Objects.hash(unitClass, side);
     }
+
+    @Override
+    public String toString() {
+        return side.getSide() + unitClass.getSymbol();
+    }
 }

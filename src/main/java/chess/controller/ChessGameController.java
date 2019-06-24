@@ -1,12 +1,9 @@
 package chess.controller;
 
-import chess.model.board.Board;
+import chess.model.MoveResult;
 import chess.model.board.Square;
 import com.google.gson.Gson;
 import spark.Route;
-
-import java.util.HashMap;
-import java.util.Map;
 
 public class ChessGameController {
     private static ChessService service;
@@ -14,22 +11,29 @@ public class ChessGameController {
         response.redirect("/chessgame.html");
         return null;
     };
-    private static Board board = Board.makeInitialBoard();
+
     public static Route move = (request, response) -> {
         response.type("application/json");
-        Map<String, Object> model = new HashMap<>();
+        MoveResult moveResult = new MoveResult();
         try {
             Square preSquare = new Square(request.queryMap("source").value());
             Square postSquare = new Square(request.queryMap("target").value());
-            boolean canMove = service.canMove(preSquare, postSquare);
-            model.put("result", canMove);
-            if (canMove)
-                board.move(new Square(request.queryMap("source").value()), new Square(request.queryMap("target").value()));
-            return new Gson().toJson(model);
+            moveResult.setSuccess(service.move(preSquare, postSquare));
+            moveResult.setKingDead(service.kingCheck());
         } catch (Exception e) {
-            model.put("result", false);
+            moveResult.setSuccess(false);
             response.status(500);
-            return new Gson().toJson(model);
+        }
+        return new Gson().toJson(moveResult);
+    };
+
+    public static Route initialize = (request, response) -> {
+        response.type("application/json");
+        try {
+            return new Gson().toJson(service.initialize());
+        } catch (Exception e) {
+            response.status(500);
+            return new Gson().toJson(e.getMessage());
         }
     };
 

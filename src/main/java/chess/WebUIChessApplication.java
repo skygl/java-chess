@@ -14,7 +14,8 @@ public class WebUIChessApplication {
 
         staticFiles.location("/templates");
 
-        get("/", ChessGameController.serveIndexPage);
+        get("/chess", ChessGameController.serveIndexPage);
+        get("/initialize", ChessGameController.initialize);
 
         post("/move", ChessGameController.move);
     }

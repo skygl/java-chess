@@ -34,11 +34,7 @@ public enum Row {
     }
 
     public static Row findRowByName(String name) {
-        return Arrays.stream(Row.values()).filter(row -> {
-            System.out.println(row.toString());
-            System.out.println(name);
-            return row.name.equals(name);
-        }).findAny().get();
+        return Arrays.stream(Row.values()).filter(row -> row.name.equals(name)).findAny().get();
     }
 
     public static Row getByIndex(final int rowIndex) {
@@ -59,6 +55,6 @@ public enum Row {
 
     @Override
     public String toString() {
-        return "Row " + this.name;
+        return this.name;
     }
 }

@@ -16,8 +16,6 @@ public class Square {
     }
 
     public Square(String source) {
-        System.out.println(source.substring(0, 1));
-        System.out.println(source.substring(1, 2));
         this.row = Row.findRowByName(source.substring(1, 2));
         this.column = Column.findColumnByName(source.substring(0, 1).toUpperCase());
     }
@@ -104,7 +102,7 @@ public class Square {
 
     @Override
     public String toString() {
-        return column.toString() + ", " + row.toString();
+        return column.toString() + row.toString();
     }
 
     @Override

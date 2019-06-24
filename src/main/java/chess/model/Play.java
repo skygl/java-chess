@@ -21,6 +21,11 @@ public class Play {
         this.board = board;
     }
 
+    public Play(final Board board, Side side) {
+        this.board = board;
+        this.side = side;
+    }
+
     public void movePieceAndTurnSide(final Square target, final Square destination) throws IllegalArgumentException {
         movePiece(side, target, destination);
         turnSide();

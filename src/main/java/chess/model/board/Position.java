@@ -1,5 +1,6 @@
 package chess.model.board;
 
+import chess.model.PieceInfo;
 import chess.model.unit.Piece;
 
 public class Position {
@@ -17,5 +18,13 @@ public class Position {
 
     public Piece getPiece() {
         return piece;
+    }
+
+    public PieceInfo createPieceInfo() {
+        PieceInfo pieceInfo = new PieceInfo();
+        pieceInfo.setPosition(square);
+        pieceInfo.setSide(piece.getSide());
+        pieceInfo.setType(piece.getUnitClass().getSymbol());
+        return pieceInfo;
     }
 }
